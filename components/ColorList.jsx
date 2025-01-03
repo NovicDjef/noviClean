@@ -4,7 +4,8 @@ import React from 'react'
 const ColorList = ({color}) => {
   return (
     <ScrollView 
-      contentContainerStyle={styles.container}>
+      horizontal={true}  // Activer le défilement horizontal
+      contentContainerStyle={[styles.container]}>
       {
         [1, 0.8, 0.5].map(opacity=> (
           <View 
@@ -19,16 +20,15 @@ const ColorList = ({color}) => {
 
 const styles = StyleSheet.create({
     color: {
-        width: '100%',
-        height: 150,
+        width: 200,  // Fixer la largeur pour un défilement horizontal
+        height: 120,
         borderRadius: 25,
-        borderCurve: 'continuous', 
-        marginBottom: 15,
+        marginRight: -5,  // Ajouter un petit espace entre les éléments
+        marginHorizontal: 10
     },
     container: {
-      paddingHorizontal: 20, 
       paddingVertical: 10, 
-      height: '100%'
+      height: 210,  // Limiter la hauteur pour le défilement horizontal
     }
 })
 

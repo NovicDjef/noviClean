@@ -7,6 +7,10 @@ const _layout = () => {
   return (
     <Tabs
         tabBar={props=> <TabBar {...props} />}
+        options={{
+            headerShown: false,
+            
+        }}
     >
         <Tabs.Screen
             name="index"
@@ -17,13 +21,13 @@ const _layout = () => {
         <Tabs.Screen
             name="explore"
             options={{
-                title: "Explore"
+                title: "Categories"
             }}
         />
         <Tabs.Screen
             name="create"
             options={{
-                title: "Create"
+                title: "Favorites"
             }}
         />
         <Tabs.Screen
