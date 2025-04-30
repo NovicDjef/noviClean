@@ -1,43 +1,61 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { Tabs } from 'expo-router'
-import TabBar from '../components/TabBar'
+import { Stack } from 'expo-router';
+// import * as SplashScreen from 'expo-splash-screen';
+import React from 'react';
+import 'react-native-reanimated';
+import { View } from 'react-native';
 
-const _layout = () => {
+// Prevent the splash screen from auto-hiding before asset loading is complete.
+// SplashScreen.preventAutoHideAsync();
+
+export default function RootLayout() {
+//   const [fontsLoaded] = useFonts({
+//     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+//   });
+
+//   const [isFirstLaunch, setIsFirstLaunch] = useState(null);
+
+//   // Vérifier la première ouverture
+//   useEffect(() => {
+//     const checkFirstLaunch = async () => {
+//       try {
+//         const hasLaunched = await AsyncStorage.getItem('hasLaunched');
+//         if (hasLaunched === null) {
+//           // Première ouverture
+//           setIsFirstLaunch(true);
+//           await AsyncStorage.setItem('hasLaunched', 'true');
+//         } else {
+//           // Déjà ouvert
+//           setIsFirstLaunch(false);
+//         }
+//       } catch (error) {
+//         console.error('Erreur lors de la vérification de la première ouverture :', error);
+//       }
+//     };
+
+//     checkFirstLaunch();
+//   }, []);
+
+//   // Masquer l'écran de chargement lorsque les polices sont chargées
+//   useEffect(() => {
+//     if (fontsLoaded) {
+//       SplashScreen.hideAsync();
+//     }
+//   }, [fontsLoaded]);
+
+//   // Attendre que les polices et l'état `isFirstLaunch` soient prêts
+//   if (!fontsLoaded || isFirstLaunch === null) {
+//     return null; // Afficher un écran de chargement si nécessaire
+//   }
+
   return (
-    <Tabs
-        tabBar={props=> <TabBar {...props} />}
-        options={{
-            headerShown: false,
-            
-        }}
-    >
-        <Tabs.Screen
-            name="index"
-            options={{
-                title: "Home"
-            }}
-        />
-        <Tabs.Screen
-            name="explore"
-            options={{
-                title: "Categories"
-            }}
-        />
-        <Tabs.Screen
-            name="create"
-            options={{
-                title: "Favorites"
-            }}
-        />
-        <Tabs.Screen
-            name="profile"
-            options={{
-                title: "Profile"
-            }}
-        />
-    </Tabs>
-  )
+    <View style={{ flex: 1 }}>
+    <Stack screenOptions={{ headerShown: false }}>
+      {/* {isFirstLaunch ? (
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+      ) : ( */}
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      {/* )} */}
+    </Stack>
+  </View>
+  );
 }
-
-export default _layout

@@ -1,12 +1,12 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react'
-import { AntDesign, Feather } from '@expo/vector-icons';
+import Colors from '../constants/Colors';
 import TabBarButton from './TabBarButton';
 
 const TabBar = ({ state, descriptors, navigation }) => {
 
 
-    const primaryColor = '#0891b2';
+    const primaryColor = Colors.primaryDark;
     const greyColor = '#737373';
   return (
     <View style={styles.tabbar}>

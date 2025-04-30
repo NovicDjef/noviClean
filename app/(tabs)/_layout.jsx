@@ -1,14 +1,14 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 import { Tabs } from 'expo-router'
-import TabBar from '../components/TabBar'
+import TabBar from '../../components/TabBar'
 
 const _layout = () => {
   return (
     <Tabs
         tabBar={props=> <TabBar {...props} />}
-        screenOptions={{
-            headerShown: false
+        options={{
+            headerShown: false,
+            
         }}
     >
         <Tabs.Screen
@@ -20,13 +20,13 @@ const _layout = () => {
         <Tabs.Screen
             name="explore"
             options={{
-                title: "Explore"
+                title: "Categories"
             }}
         />
         <Tabs.Screen
             name="create"
             options={{
-                title: "Create"
+                title: "Favorites"
             }}
         />
         <Tabs.Screen

@@ -2,7 +2,6 @@ import { Dimensions } from 'react-native'
 const { height, width } = Dimensions.get('window')
 
 export const COLORS = {
-    primary: '#10A37F',
     white: '#FFFFFF',
     secondaryWhite: '#F7F7F8',
     black: '#030013',
@@ -10,6 +9,28 @@ export const COLORS = {
     tertiaryBlack: '#202123',
     gray: 'F8F8F8',
     secondaryGray: '#808080',
+    primary: '#637aff',
+    primaryDark: '#2759ff',
+    primaryLite: '#637aff99',
+    black: '#000',
+    white: '#ffffff',
+    accent: '#112233',
+    green: '#60c5a8',
+    green2: '#039a83',
+    light: '#EEEEEE',
+    dark: '#333',
+    gray: '#CCCCCC',
+    red: '#ff2f68',
+    lightRed: '#ff4f7e',
+    darkRed: '#d9365e',
+    purple: '#8f06e4',
+    skyBlue: 'skyblue',
+    yellow: '#f8c907',
+    pink: '#ff4c98',
+    gold: 'gold',
+    line: '#282C35',
+    gray: '#CCCCCC',
+    darkGray: '#999999',
 }
 
 export const SIZES = {

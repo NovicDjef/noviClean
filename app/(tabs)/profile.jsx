@@ -1,17 +1,11 @@
 import { Ionicons } from '@expo/vector-icons';
-
 import { useNavigation } from '@react-navigation/native';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import React, { useState, useEffect } from 'react';
-
-import { View, Text, Image, StyleSheet, TouchableOpacity, Switch } from 'react-native';
-import { ScrollView } from 'react-native';
-
-import { COLORS, FONTS, SIZES } from '../constants';
-import { useTheme } from '../themes/ThemeProvider';
-import PaymentBottomSheet from '../components/PaymentBottomSheet';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Switch, ScrollView } from 'react-native';
+import { COLORS, FONTS, SIZES } from '../../constants';
+import { useTheme } from '../../themes/ThemeProvider';
+import PaymentBottomSheet from '../../components/PaymentBottomSheet';
 import { Stack } from 'expo-router';
 
 
@@ -66,7 +60,7 @@ const Profile = () => {
       <ScrollView contentContainerStyle={[styles.container, { backgroundColor: colors.background, }]}>
         
         <View style={styles.profileSection}>
-          <Image source={require('../assets/images/avatar.jpg')} style={styles.profileImage} />
+          <Image source={require('../../assets/images/avatar.jpg')} style={styles.profileImage} />
           <Text style={[styles.username, { color: colors.text }]}>Novic Tonleu</Text>
           <Text style={[styles.joinDate, { color: colors.text }]}>Frontend Developer</Text>
           <View style={[styles.statsContainer]}>
