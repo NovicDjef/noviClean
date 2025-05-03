@@ -6,12 +6,12 @@ import { Link } from 'expo-router';
 const { width } = Dimensions.get('window');
 
 const productsData = [
-  { id: '1', name: 'Chaussure Nike', price: 100, image: require("../assets/images/1.jpg") },
-  { id: '2', name: 'Adidas Boost', price: 120, image: require("../assets/images/2.jpg") },
-  { id: '3', name: 'Puma RS-X', price: 90, image: require("../assets/images/5.jpg") },
-  { id: '4', name: 'Vans Classic', price: 80, image: require("../assets/images/6.jpg") },
-  { id: '5', name: 'Reebok Club C', price: 110, image: require("../assets/images/1.jpg") },
-  { id: '6', name: 'Converse All-Star', price: 95, image: require("../assets/images/6.jpg") },
+  { id: '1', name: 'cleaning company', price: 100, image: require("../assets/images/1.avif") },
+  { id: '2', name: 'Office Cleaning', price: 120, image: require("../assets/images/2.jpg") },
+  { id: '3', name: 'House cleaning', price: 90, image: require("../assets/images/3.jpg") },
+  { id: '4', name: 'kitchen cleaning', price: 80, image: require("../assets/images/4.webp") },
+  { id: '5', name: 'Reebok Club C', price: 110, image: require("../assets/images/5.webp") },
+  { id: '6', name: 'Converse All-Star', price: 95, image: require("../assets/images/2.jpg") },
 ];
 
 export default function Produits() {
@@ -20,7 +20,7 @@ export default function Produits() {
     <Link  
     key={item.id}
     href={{
-      pathname: `/game/GridGame`,
+      pathname: `/detail/DetailJob`,
       params: { id: item.id, name: item.name, price: item.price, image: item.image },
     }}  
           asChild
@@ -31,7 +31,7 @@ export default function Produits() {
       <Text style={styles.name}>{item.name}</Text>
       <View style={styles.priceRow}>
         <Text style={styles.originalPrice}>${item.price.toFixed(2)}</Text>
-        <Text style={styles.gamePrice}>  ${ (item.price / 5).toFixed(2) }</Text>
+        <Text style={styles.gamePrice}>  ${ (item.price / 5).toFixed(2) }/h</Text>
       </View>
     </TouchableOpacity>
     </Link>

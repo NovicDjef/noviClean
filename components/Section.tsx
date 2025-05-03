@@ -16,7 +16,7 @@ export default function Section({label, styless, href}) {
       asChild
     > */}
         <TouchableOpacity style={styles.icons} >
-            <Text style={styles.userName}> tous voir.. </Text>
+            <Text style={styles.userName}> see all.. </Text>
             <Ionicons name='chevron-forward-outline' size={24} color={Colors.black}/>
         </TouchableOpacity>
         {/* </Link> */}
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: Platform.OS === 'ios' ? 5 : 5,
+    // marginBottom: Platform.OS === 'ios' ? 2 : 2,
   },
   userImage: {
     width: 50,

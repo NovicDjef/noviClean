@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      background: #222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .wheel {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 10px solid #fff;
+      position: relative;
+      background: conic-gradient(
+        #f00 0deg 90deg,
+        #0f0 90deg 180deg,
+        #00f 180deg 270deg,
+        #ff0 270deg 360deg
+      );
+      transition: transform 5s cubic-bezier(0.33, 1, 0.68, 1);
+    }
+    .pointer {
+      width: 0; height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 30px solid white;
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    button {
+      margin-top: 40px;
+      padding: 10px 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="pointer"></div>
+  <div class="wheel" id="wheel"></div>
+  <button onclick="spin()">Arrêter la roue</button>
+
+  <script>
+    let deg = 0;
+    function spin() {
+      const wheel = document.getElementById("wheel");
+      deg = Math.floor(3600 + Math.random() * 720); // tourne beaucoup
+      wheel.style.transform = `rotate(${deg}deg)`;
+      setTimeout(() => {
+        const result = (deg % 360);
+        if (result >= 0 && result < 90) {
+          alert("🎉 Gagné : +1 Lancer !");
+        } else if (result >= 90 && result < 180) {
+          alert("🎁 Gagné : CA$25");
+        } else if (result >= 180 && result < 270) {
+          alert("💸 Gagné : CA$10");
+        } else {
+          alert("🎊 Jackpot : CA$100 !");
+        }
+      }, 5200);
+    }
+
+    // Spin automatique au chargement
+    window.onload = () => setTimeout(spin, 1000);
+  </script>
+</body>
+</html>

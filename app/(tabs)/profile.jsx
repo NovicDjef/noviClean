@@ -66,7 +66,7 @@ const Profile = () => {
           <View style={[styles.statsContainer]}>
             <View style={styles.statItem}>
               <Text style={[styles.statValue, { color: colors.text }]}>{conversationCount}</Text>
-              <Text style={[styles.statLabel, { color: colors.text }]}>Total Conversation</Text>
+              <Text style={[styles.statLabel, { color: colors.text }]}>Total jeux</Text>
             </View>
             {/* <View style={styles.statItem}>
               <Text style={styles.statValue}>2.102</Text>
@@ -74,7 +74,7 @@ const Profile = () => {
             </View> */}
             <View style={styles.statItem}>
               <Text style={[styles.statValue, { color: colors.text }]}>{messageCount}</Text>
-              <Text style={[styles.statLabel, { color: colors.text }]}>Total Messages</Text>
+              <Text style={[styles.statLabel, { color: colors.text }]}>Total gain</Text>
             </View>
           </View>
         </View>
@@ -84,31 +84,31 @@ const Profile = () => {
             onPress={() => setIsPaymentVisible(true)}
           >
           <View style={styles.menuIconContainer}>
-            <Ionicons name="card-outline" size={24} color="#000" />
+            <Ionicons name="card-outline" size={24} color={COLORS.primaryDark} />
           </View>
-          <Text style={[styles.menuText, { color: colors.text }]}>Payment</Text>
-          <Ionicons name="chevron-forward" size={24} color="#000" />
+          <Text style={[styles.menuText, { color: colors.text }]}>Ajouter carte</Text>
+          <Ionicons name="chevron-forward" size={24} color={COLORS.primaryDark} />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.menuItem}>
           <View style={styles.menuIconContainer}>
-            <Ionicons name="heart-outline" size={24} color="#000" />
+            <Ionicons name="heart-outline" size={24} color={COLORS.primaryDark} />
           </View>
           <Text style={[styles.menuText, { color: colors.text }]}>Favorites</Text>
-          <Ionicons name="chevron-forward" size={24} color="#000" />
+          <Ionicons name="chevron-forward" size={24} color={COLORS.primaryDark} />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.menuItem}>
           <View style={styles.menuIconContainer}>
-            <Ionicons name="settings-outline" size={24} color="#000" />
+            <Ionicons name="settings-outline" size={24} color={COLORS.primaryDark} />
           </View>
           <Text style={[styles.menuText, { color: colors.text }]}>Settings</Text>
-          <Ionicons name="chevron-forward" size={24} color="#000" />
+          <Ionicons name="chevron-forward" size={24} color={COLORS.primaryDark} />
         </TouchableOpacity>
 
         <View style={styles.menuItem}>
           <View style={styles.menuIconContainer}>
-            <Ionicons name="language" size={24} color="#000" />
+            <Ionicons name="language" size={24} color={COLORS.primaryDark} />
           </View>
           <Text style={[styles.menuText, { color: colors.text }]}>Language</Text>
           <Text style={styles.languageValue}>English</Text>
@@ -119,7 +119,7 @@ const Profile = () => {
           <Ionicons 
             name="moon"
             size={24} 
-            color="#000"
+            color={COLORS.primaryDark}
           />
         </View>
         <Text style={[styles.menuText, { color: colors.text }]}>Dark Mode</Text>
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 50,
     borderWidth: 3,
-    borderColor: '#20B2AA',
+    borderColor: COLORS.primaryDark,
   },
   username: {
     fontSize: 24,
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#E0FFFF',
+    backgroundColor: COLORS.primaryDark + 30,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 15,
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.primaryDark,
     width: 300,
     paddingVertical: SIZES.padding * 2,
     borderRadius: 12,

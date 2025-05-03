@@ -6,6 +6,7 @@ import Colors from "../../constants/Colors"
 import Section from "../../components/Section"
 import Categories from "../../components/Categories"
 import Produits from "../../components/Produits"
+import Slide from '../../components/Slide'
 
 const Home = () => {
   return (
@@ -17,6 +18,8 @@ const Home = () => {
         </View>
       </View>
       <ScrollView>
+        <Slide />
+        <Section styless  label="Categories"/>
         <Categories />
         <Section styless  label="Produits"/>
         <Produits />
@@ -27,7 +30,7 @@ const Home = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryDark
+    
   },
   content: {
     marginTop: 60,
