@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { COLORS } from '@/constants/theme';
 
 
 
@@ -51,7 +52,7 @@ export const PromoCodeInput = () => (
       placeholder="Promo Code"
       style={{ flex: 1, borderWidth: 1, borderColor: '#ddd', padding: 10, borderRadius: 4 }}
     />
-    <TouchableOpacity style={{ backgroundColor: 'black', padding: 10, borderRadius: 4, marginLeft: 8 }}>
+    <TouchableOpacity style={{ backgroundColor: COLORS.primaryDark, padding: 10, borderRadius: 4, marginLeft: 8 }}>
       <Text style={{ color: 'white' }}>Apply</Text>
     </TouchableOpacity>
   </View>

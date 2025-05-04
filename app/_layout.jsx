@@ -1,3 +1,4 @@
+import 'react-native-get-random-values'
 import { Stack } from 'expo-router';
 // import * as SplashScreen from 'expo-splash-screen';
 import React from 'react';

@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TextInput, Image, ScrollView, TouchableOpacity, ActivityIndicator, Animated, Easing, StyleSheet } from 'react-native'
 import { BottomSheet } from '@rneui/themed';
 import { PromoCodeInput } from './PaymentComponents';
+import SearchLocationInput from "./SearchLocationInput"
+import { COLORS } from '@/constants/theme';
 
 const PaymentBottomSheet = ({ isVisible, onClose }) => {
   const [cardInfo, setCardInfo] = useState({
@@ -102,8 +104,13 @@ const PaymentBottomSheet = ({ isVisible, onClose }) => {
     <BottomSheet isVisible={isVisible} onBackdropPress={onClose}>
       <ScrollView style={{ backgroundColor: 'white', padding: 16, maxHeight: "100%", borderTopRightRadius: 20, borderTopLeftRadius: 20 }}>
         <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 6 }}>Payment</Text>
+        <SearchLocationInput />
         
         <PromoCodeInput />
+        <View style={{marginBottom:10}}>
+          <Text style={{fontSize: 17, fontWeight: 700}}>ce service inclu :</Text>
+          <Text style={{color: COLORS.darkGray }}>un salon, une douche une chambre et une cuisine </Text>
+        </View>
 
         <TextInput
           placeholder="Card Number"
@@ -119,25 +126,23 @@ const PaymentBottomSheet = ({ isVisible, onClose }) => {
           onChangeText={(text) => updateCardInfo('name', text)}
           style={styless.input}
         />
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <TextInput
             placeholder="Expire Date"
             value={cardInfo.expiry}
             onChangeText={(text) => updateCardInfo('expiry', text)}
             keyboardType="numeric"
-            maxLength={7} // MM/YYYY
-            style={[styless.input, { width: '48%' }]}
+            maxLength={7}
+            style={styless.input}
           />
           <TextInput
             placeholder="CVV"
             value={cardInfo.cvv}
             onChangeText={(text) => updateCardInfo('cvv', text)}
-            style={[styless.input, { width: '48%' }]}
+            style={styless.input}
             keyboardType="numeric"
             maxLength={3}
             secureTextEntry
           />
-        </View>
 
         <TouchableOpacity
           style={styles.placeOrderButton}
@@ -159,11 +164,12 @@ const PaymentBottomSheet = ({ isVisible, onClose }) => {
 
 const styless = {
   input: {
-    borderWidth: 1,
+    backgroundColor: '#f0f0f0',
     borderColor: '#ddd',
     padding: 10,
     marginBottom: 10,
-    borderRadius: 4,
+    borderRadius: 8,
+    height: 40,
   },
 };
 
@@ -174,7 +180,7 @@ const styles = StyleSheet.create({
       maxHeight: '80%',
     },
     placeOrderButton: {
-      backgroundColor: 'black',
+      backgroundColor: COLORS.primaryDark,
       padding: 15,
       borderRadius: 8,
       alignItems: 'center',
@@ -200,13 +206,13 @@ const styles = StyleSheet.create({
       fontSize: 20,
       fontWeight: 'bold',
       marginTop: 20,
-      color: '#4CAF50',
+      color: COLORS.primaryDark,
     },
     checkmarkCircle: {
       width: 100,
       height: 100,
       borderRadius: 50,
-      backgroundColor: '#4CAF50',
+      backgroundColor: COLORS.primaryDark,
       justifyContent: 'center',
       alignItems: 'center',
     },
