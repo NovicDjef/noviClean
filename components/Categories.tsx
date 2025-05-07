@@ -22,11 +22,12 @@ import { color } from '@rneui/themed/dist/config';
 //     <View style={[styles.favoriteButton, { backgroundColor: '#e0e0e0' }]} />
 //   </View>
 // );
+
 const data = [
-  { id: 1, name: "Chaussure", icon: "walk" },
+  { id: 1, name: "Chaussure", icon: "water" },
   { id: 5, name: "Accessoires", icon: "watch" },
-  { id: 3, name: "Électro", icon: "phone-portrait" },
-  { id: 4, name: "Habits", icon: "shirt" },
+  { id: 3, name: "Électro", icon: "leaf" },
+  { id: 4, name: "Habits", icon: "flame" },
   { id: 2, name: "Huile", icon: "flask" },
   { id: 6, name: "Cosmétiques", icon: "rose" },
 ];

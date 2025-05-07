@@ -4,6 +4,9 @@ import { BottomSheet } from '@rneui/themed';
 import { PromoCodeInput } from './PaymentComponents';
 import SearchLocationInput from "./SearchLocationInput"
 import { COLORS } from '@/constants/theme';
+import HourDropdown from "./HourDropdown"
+import { Ionicons } from '@expo/vector-icons';
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const PaymentBottomSheet = ({ isVisible, onClose }) => {
   const [cardInfo, setCardInfo] = useState({
@@ -12,11 +15,29 @@ const PaymentBottomSheet = ({ isVisible, onClose }) => {
     expiry: '',
     cvv: ''
   });
-  const [selectedPayment, setSelectedPayment] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const scaleAnim = useRef(new Animated.Value(0)).current;
+  const [form, setForm] = useState({
+    name: "",
+    dosage: "",
+    frequency: "",
+    duration: "",
+    startDate: new Date(),
+    times: ["09:00"],
+    notes: "",
+    reminderEnabled: true,
+    refillReminder: false,
+    currentSupply: "",
+    refillAt: "",
+  });
+  // gestionjaysonburns@gmail.com
+  // Gestion1%Burns     596532
+  const [showTimePicker, setShowTimePicker] = useState(false);
+  const [showDatePicker, setShowDatePicker] = useState(false);
+
+
 
   useEffect(() => {
     if (isSuccess) {
@@ -102,7 +123,7 @@ const PaymentBottomSheet = ({ isVisible, onClose }) => {
 
   return (
     <BottomSheet isVisible={isVisible} onBackdropPress={onClose}>
-      <ScrollView style={{ backgroundColor: 'white', padding: 16, maxHeight: "100%", borderTopRightRadius: 20, borderTopLeftRadius: 20 }}>
+      <ScrollView style={{ backgroundColor: 'white', padding: 16, maxHeight: "110%", borderTopRightRadius: 20, borderTopLeftRadius: 20 }}>
         <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 6 }}>Payment</Text>
         <SearchLocationInput />
         
@@ -113,7 +134,7 @@ const PaymentBottomSheet = ({ isVisible, onClose }) => {
         </View>
 
         <TextInput
-          placeholder="Card Number"
+          placeholder="Name of Company"
           value={formatCardNumber(cardInfo.number)}
           onChangeText={(text) => updateCardInfo('number', text)}
           keyboardType="numeric"
@@ -121,28 +142,106 @@ const PaymentBottomSheet = ({ isVisible, onClose }) => {
           style={styless.input}
         />
         <TextInput
-          placeholder="Cardholder Name"
+          placeholder="Email Adress "
           value={cardInfo.name}
           onChangeText={(text) => updateCardInfo('name', text)}
           style={styless.input}
         />
-          <TextInput
-            placeholder="Expire Date"
-            value={cardInfo.expiry}
-            onChangeText={(text) => updateCardInfo('expiry', text)}
-            keyboardType="numeric"
-            maxLength={7}
-            style={styless.input}
-          />
-          <TextInput
-            placeholder="CVV"
-            value={cardInfo.cvv}
-            onChangeText={(text) => updateCardInfo('cvv', text)}
-            style={styless.input}
-            keyboardType="numeric"
-            maxLength={3}
-            secureTextEntry
-          />
+        <HourDropdown />
+
+          <View style={styles.Estimated}>
+            <Text style={{ fontSize: 17, color: "gray" }}>Estimated Price</Text>
+            <Text style={{ fontSize: 18, color: COLORS.primaryDark, fontWeight: 'bold' }}>$150 </Text>
+          </View>
+
+          <View style={styles.section}>
+           
+            <TouchableOpacity
+              style={styles.dateButton}
+              onPress={() => setShowDatePicker(true)}
+            >
+              <View style={styles.dateIconContainer}>
+                <Ionicons name="calendar" size={18} color={COLORS.primaryDark} />
+              </View>
+              <Text style={styles.dateButtonText}>
+                Starts {form.startDate.toLocaleDateString()}
+              </Text>
+              <Ionicons name="chevron-forward" size={20} color="#666" />
+            </TouchableOpacity>
+
+            {showDatePicker && (
+              <DateTimePicker
+                value={form.startDate}
+                mode="date"
+                onChange={(event, date) => {
+                  setShowDatePicker(false);
+                  if (date) setForm({ ...form, startDate: date });
+                }}
+              />
+            )}
+
+            {form.frequency !== "As needed" && (
+              <View style={styles.timesContainer}>
+                <Text style={styles.timesTitle}>Select Time</Text>
+                {form.times.map((time, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    style={styles.timeButton}
+                    onPress={() => {
+                      setShowTimePicker(true);
+                    }}
+                  >
+                    <View style={styles.timeIconContainer}>
+                      <Ionicons name="time-outline" size={18} color={COLORS.primaryDark} />
+                    </View>
+                    <Text style={styles.timeButtonText}>{time}</Text>
+                    <Ionicons name="chevron-forward" size={20} color="#666" />
+                  </TouchableOpacity>
+                ))}
+              </View>
+            )}
+
+            {showTimePicker && (
+              <DateTimePicker
+                value={(() => {
+                  const [hours, minutes] = form.times[0].split(":").map(Number);
+                  const date = new Date();
+                  date.setHours(hours, minutes, 0, 0);
+                  return date;
+                })()}
+                mode="time"
+                onChange={(event, date) => {
+                  setShowTimePicker(false);
+                  if (date) {
+                    const newTime = date.toLocaleTimeString("default", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hour12: false,
+                    });
+                    setForm((prev) => ({
+                      ...prev,
+                      times: prev.times.map((t, i) => (i === 0 ? newTime : t)),
+                    }));
+                  }
+                }}
+              />
+            )}
+          </View>
+
+          <View style={styles.section}>
+            <View style={styles.textAreaContainer}>
+              <TextInput
+                style={styles.textArea}
+                placeholder="Add notes or special instructions..."
+                placeholderTextColor="#999"
+                value={form.notes}
+                onChangeText={(text) => setForm({ ...form, notes: text })}
+                multiline
+                numberOfLines={4}
+                textAlignVertical="top"
+              />
+            </View>
+          </View>
 
         <TouchableOpacity
           style={styles.placeOrderButton}
@@ -172,6 +271,7 @@ const styless = {
     height: 40,
   },
 };
+
 
 const styles = StyleSheet.create({
     container: {
@@ -239,6 +339,146 @@ const styles = StyleSheet.create({
       top: 16,
       transform: [{ rotate: '-45deg' }],
     },
+      pickerContainer: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 8,
+        overflow: 'hidden',
+      },
+      picker: {
+        height: 50,
+        width: '100%',
+      },
+      Estimated: {
+        backgroundColor: '#f0f0f0',
+        borderColor: '#ddd',
+        padding: 10,
+        marginBottom:10,
+        borderRadius: 8,
+        height: 40,
+        marginTop: 12,
+        flexDirection: "row",
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      },
+
+      dateButton: {
+        flexDirection: "row",
+        alignItems: "center",
+        borderRadius: 8,
+        padding: 8,
+        marginTop: 15,
+        backgroundColor: '#f0f0f0',
+        borderColor: "#e0e0e0",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 8,
+        elevation: 2,
+      },
+      dateIconContainer: {
+        width: 30,
+        height: 30,
+        borderRadius: 20,
+        backgroundColor: COLORS.primaryDark +30,
+        justifyContent: "center",
+        alignItems: "center",
+        marginRight: 10,
+      },
+      dateButtonText: {
+        flex: 1,
+        fontSize: 16,
+        color: "#333",
+      },
+      card: {
+        backgroundColor: "white",
+        borderRadius: 16,
+        padding: 20,
+        borderWidth: 1,
+        borderColor: "#e0e0e0",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 8,
+        elevation: 2,
+      },
+      switchRow: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+      },
+      switchLabelContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        flex: 1,
+      },
+      iconContainer: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        backgroundColor: "#f5f5f5",
+        justifyContent: "center",
+        alignItems: "center",
+        marginRight: 15,
+      },
+      timesContainer: {
+        marginTop: 20,
+      },
+      timesTitle: {
+        fontSize: 16,
+        fontWeight: "600",
+        color: "#333",
+        marginBottom: 10,
+      },
+      timeButton: {
+        flexDirection: "row",
+        alignItems: "center",
+        backgroundColor: "#f0f0f0",
+        borderRadius: 8,
+        padding: 8,
+        marginBottom: 10,
+        borderColor: "#e0e0e0",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 8,
+        elevation: 2,
+      },
+      timeIconContainer: {
+        width: 30,
+        height: 30,
+        borderRadius: 20,
+        backgroundColor: COLORS.primaryDark +30,
+        justifyContent: "center",
+        alignItems: "center",
+        marginRight: 10,
+      },
+      timeButtonText: {
+        flex: 1,
+        fontSize: 16,
+        color: "#333",
+      },
+      textAreaContainer: {
+        backgroundColor: "white",
+        borderRadius: 16,
+        borderWidth: 1,
+        borderColor: "#e0e0e0",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 8,
+        elevation: 2,
+      },
+      section: {
+        marginBottom: 20,
+      },
+      textArea: {
+        height: 100,
+        padding: 15,
+        fontSize: 16,
+        color: "#333",
+      },
+
   });
   
 export default PaymentBottomSheet;

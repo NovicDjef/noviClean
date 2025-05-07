@@ -19,7 +19,7 @@ import { router } from 'expo-router';
    } from 'react-native-reanimated';
 
 
- const Booking = () => {
+ const BookingHouse = () => {
    const [cardInfo, setCardInfo] = useState({
      number: '',
      name: '',
@@ -528,4 +528,4 @@ import { router } from 'expo-router';
  
    });
    
- export default Booking;
+ export default BookingHouse;

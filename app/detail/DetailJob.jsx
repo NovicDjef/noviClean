@@ -17,7 +17,6 @@ import { COLORS, FONTS, SIZES } from '@/constants/theme';
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import Section from "../../components/Section"
-import BookingBottomSheet from '../../components/BookingBottomSheet';
 
 
 type Props = {}
@@ -83,202 +82,202 @@ const DetailJob = (props: Props) => {
       }
 
   
-    function renderHeader() {
-        const inputRange =  [0, HEADER_HEIGHT -40]
-        headerShareValue.value = withDelay(500, 
-          withTiming(0, {
-            duration: 500
-          })
-        )
-  
-     
-  
-          const headerHieghtAnimatedStyle = useAnimatedStyle(() => {
-            return {
-              height: interpolate(scrollY.value, inputRange,
-              [HEADER_HEIGHT, 140], Extrapolate.CLAMP)
-            }
-          })
-        
-          const headerHideOnscrollAnimationStyle = useAnimatedStyle(() => {
-            return {
-              opacity : interpolate(scrollY.value, [80, 0],
-              [0, 1], Extrapolate.CLAMP),
-              transform: [
-                {
-                  translateY: interpolate(scrollY.value,
-                  inputRange, [0, 200], Extrapolate.CLAMP)
-                }
-              ]
-            }
-          })
-  
-          const headerShowOnScrollAnimatedStyle = useAnimatedStyle(() => {
-            return {
-              opacity: interpolate(scrollY.value, [80, 0],
-              [1, 0], Extrapolate.CLAMP), 
-              transform: [
-                {
-                  translateY: interpolate(scrollY.value,
-                  inputRange, [50, 130], Extrapolate.CLAMP)
-                }
-              ]
-            }
-          })
-        
-        return (
-          <Animated.View
-           style={[{
-            position: 'relative',
-            top: 0,
-            left: 0,
-            right: 0,
-            height: 120,
-            overflow: 'hidden',
-           }, headerHieghtAnimatedStyle]}
-          >
-
-             <Image
-             source={image}
-            // source={require('../../assets/images/glacier.jpg')}
-              resizeMode="cover"
-               style={{
-                 height: '100%',
-                 width: '100%',
-                 borderBottomLeftRadius: 60,
-               }}
-             />
+      function renderHeader() {
+          const inputRange =  [0, HEADER_HEIGHT -40]
+          headerShareValue.value = withDelay(500, 
+            withTiming(0, {
+              duration: 500
+            })
+          )
     
-            {/* titre */}
-               <Animated.View style={[{
-                position: "absolute",
-                top: -70,
-                left: 0,
-                right: 0
-               }, headerShowOnScrollAnimatedStyle]}>
-                <Text style={{
-                  textAlign: "center",
-                  color: COLORS.white,
-                  ...FONTS.h1,
-                  fontWeight: "bold"
-                }}>
-                  {name}
-                </Text>
-                <View style={{display: "flex", justifyContent: "center", alignItems: "center", top: 16}}>
-                <View style={{ position: "absolute", marginTop: 100, marginLeft: 32, flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
-                  <View style={{flexDirection: "column", margin: 2,}}>
-                    <View style={{ flexDirection: 'row' }}>
-                      {[...Array(5)].map((_, i) => (
-                        <Ionicons 
-                          key={i} 
-                          name="star"
-                          size={20} 
-                          color={COLORS.yellow}
-                          style={{ marginRight: 2 }} 
-                        />
-                      ))}
-                    </View>
-                      <Text style={{color: COLORS.white}}>5.0 Star ratings</Text>
-                  </View>
-                </View>
-                </View>
-               </Animated.View>
-  
-  
+      
+    
+            const headerHieghtAnimatedStyle = useAnimatedStyle(() => {
+              return {
+                height: interpolate(scrollY.value, inputRange,
+                [HEADER_HEIGHT, 140], Extrapolate.CLAMP)
+              }
+            })
+          
+            const headerHideOnscrollAnimationStyle = useAnimatedStyle(() => {
+              return {
+                opacity : interpolate(scrollY.value, [80, 0],
+                [0, 1], Extrapolate.CLAMP),
+                transform: [
+                  {
+                    translateY: interpolate(scrollY.value,
+                    inputRange, [0, 200], Extrapolate.CLAMP)
+                  }
+                ]
+              }
+            })
+    
+            const headerShowOnScrollAnimatedStyle = useAnimatedStyle(() => {
+              return {
+                opacity: interpolate(scrollY.value, [80, 0],
+                [1, 0], Extrapolate.CLAMP), 
+                transform: [
+                  {
+                    translateY: interpolate(scrollY.value,
+                    inputRange, [50, 130], Extrapolate.CLAMP)
+                  }
+                ]
+              }
+            })
+          
+          return (
             <Animated.View
             style={[{
-              position: 'absolute',
-              bottom: 80,
-              left: 30,
-            }, headerHideOnscrollAnimationStyle]}
+              position: 'relative',
+              top: 0,
+              left: 0,
+              right: 0,
+              height: 120,
+              overflow: 'hidden',
+            }, headerHieghtAnimatedStyle]}
             >
-                <Text
+
+              <Image
+              source={image}
+              // source={require('../../assets/images/glacier.jpg')}
+                resizeMode="cover"
                 style={{
-                  position: 'absolute',
-                  color: COLORS.white,
-                  ...FONTS.h1,
-                  fontWeight: "bold"
+                  height: '100%',
+                  width: '100%',
+                  borderBottomLeftRadius: 60,
                 }}
-                >
-                  {name}
-                </Text>
-                             
-            </Animated.View>
-            <View style={{ position: "absolute", marginLeft: 32, top: 220, flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
-              <View style={{flexDirection: "column", margin: 2,}}>
-                    <View style={{ flexDirection: 'row' }}>
-                    {[...Array(5)].map((_, i) => (
-                        <Ionicons 
-                          key={i} 
-                          name="star"
-                          size={20} 
-                          color={COLORS.yellow} 
-                          style={{ marginRight: 2 }} 
-                        />
-                      ))}
+              />
+      
+              {/* titre */}
+                <Animated.View style={[{
+                  position: "absolute",
+                  top: -70,
+                  left: 0,
+                  right: 0
+                }, headerShowOnScrollAnimatedStyle]}>
+                  <Text style={{
+                    textAlign: "center",
+                    color: COLORS.white,
+                    ...FONTS.h1,
+                    fontWeight: "bold"
+                  }}>
+                    {name}
+                  </Text>
+                  <View style={{display: "flex", justifyContent: "center", alignItems: "center", top: 16}}>
+                  <View style={{ position: "absolute", marginTop: 100, marginLeft: 32, flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+                    <View style={{flexDirection: "column", margin: 2,}}>
+                      <View style={{ flexDirection: 'row' }}>
+                        {[...Array(5)].map((_, i) => (
+                          <Ionicons 
+                            key={i} 
+                            name="star"
+                            size={20} 
+                            color={COLORS.yellow}
+                            style={{ marginRight: 2 }} 
+                          />
+                        ))}
+                      </View>
+                        <Text style={{color: COLORS.white}}>5.0 Star ratings</Text>
                     </View>
-                      <Text style={{color: COLORS.white, top: 0}}>5.0 Star_ratings </Text>
+                  </View>
+                  </View>
+                </Animated.View>
+    
+    
+              <Animated.View
+              style={[{
+                position: 'absolute',
+                bottom: 80,
+                left: 30,
+              }, headerHideOnscrollAnimationStyle]}
+              >
+                  <Text
+                  style={{
+                    position: 'absolute',
+                    color: COLORS.white,
+                    ...FONTS.h1,
+                    fontWeight: "bold"
+                  }}
+                  >
+                    {name}
+                  </Text>
+                              
+              </Animated.View>
+              <View style={{ position: "absolute", marginLeft: 32, top: 220, flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+                <View style={{flexDirection: "column", margin: 2,}}>
+                      <View style={{ flexDirection: 'row' }}>
+                      {[...Array(5)].map((_, i) => (
+                          <Ionicons 
+                            key={i} 
+                            name="star"
+                            size={20} 
+                            color={COLORS.yellow} 
+                            style={{ marginRight: 2 }} 
+                          />
+                        ))}
+                      </View>
+                        <Text style={{color: COLORS.white, top: 0}}>5.0 Star_ratings </Text>
+                </View>
               </View>
-            </View>
 
-            <View style={{
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-      paddingHorizontal: 20,
-      position: "absolute",
-      top: 40,
-      left: 0,
-      right: 0,
-    }}>
-      {/* Premier élément aligné à gauche */}
-      <Animated.View
-        style={{
-          width: 50,
-          height: 50,
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderRadius: 25,
-          backgroundColor: COLORS.primaryDark + 30,
-        }}
-      >
-        <Ionicons 
-          name='arrow-back' 
-          size={24}
-          onPress={() => {
-            setTimeout(() => {
-              headerShareValue.value = withTiming(80, {
-                duration: 500
-              }, () => {
-                runOnJS(BackHandler)();
-              });
-            }, 100);
+              <View style={{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingHorizontal: 20,
+        position: "absolute",
+        top: 40,
+        left: 0,
+        right: 0,
+      }}>
+        {/* Premier élément aligné à gauche */}
+        <Animated.View
+          style={{
+            width: 50,
+            height: 50,
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 25,
+            backgroundColor: COLORS.primaryDark + 30,
           }}
-          color={COLORS.primaryDark}
-        />
+        >
+          <Ionicons 
+            name='arrow-back' 
+            size={24}
+            onPress={() => {
+              setTimeout(() => {
+                headerShareValue.value = withTiming(80, {
+                  duration: 500
+                }, () => {
+                  runOnJS(BackHandler)();
+                });
+              }, 100);
+            }}
+            color={COLORS.primaryDark}
+          />
+        </Animated.View>
+        
+        {/* Deuxième élément aligné à droite */}
+        
+        <Animated.View
+        style={[
+          styles.HeureContent,
+          animatedStyle,
+          { backgroundColor: COLORS.primary + '90'}
+        ]}
+      >
+        <Text style={styles.textHeure}>
+          Ouvert 
+        </Text>
       </Animated.View>
-      
-      {/* Deuxième élément aligné à droite */}
-      
-      <Animated.View
-      style={[
-        styles.HeureContent,
-        animatedStyle,
-        { backgroundColor: COLORS.primary + '90'}
-      ]}
-    >
-      <Text style={styles.textHeure}>
-        Ouvert 
-      </Text>
-    </Animated.View>
-  </View>
-  
+    </View>
+    
 
+              
+            </Animated.View>
             
-          </Animated.View>
-          
-        );
-      }
+          );
+        }
 
       function renderMenu() {
         const categories = [
@@ -372,15 +371,13 @@ const DetailJob = (props: Props) => {
         {renderServices()}
 
         <TouchableOpacity style={styles.booknow}
-           onPress={() => setIsBookingVisible(true)}
+           onPress={() => router.push("./Booking")}
            >
           <Text style={styles.booknowText}>
             Book Now
           </Text>
         </TouchableOpacity>
-        <BookingBottomSheet
-          isVisible={isBookingVisible}
-          onClose={() => setIsBookingVisible(false)} />
+       
       </ScrollView>
     </>
     

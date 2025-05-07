@@ -30,7 +30,7 @@ export default function Produits() {
       <Image source={item.image} style={styles.image} resizeMode="cover" />
       <Text style={styles.name}>{item.name}</Text>
       <View style={styles.priceRow}>
-        <Text style={styles.originalPrice}>${item.price.toFixed(2)}</Text>
+        <Text style={styles.originalPrice}>A partir de</Text>
         <Text style={styles.gamePrice}>  ${ (item.price / 5).toFixed(2) }/h</Text>
       </View>
     </TouchableOpacity>
@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
   },
   originalPrice: {
-    color: COLORS.secondaryBlack + 50,
-    textDecorationLine: 'line-through',
+    color: COLORS.secondaryBlack +70,
+    // textDecorationLine: 'line-through',
     marginRight: 6,
   },
   gamePrice: {

@@ -42,7 +42,8 @@ const SearchLocationInput = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: 10
+    marginBottom: 10,
+    marginTop: 12
   },
   inputWrapper: {
     position: 'relative',
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
   icon: {
     position: 'absolute',
     right: 15,
-    top: 14,
+    top: 10,
     zIndex: 1,
   },
 });
