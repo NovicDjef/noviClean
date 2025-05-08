@@ -9,9 +9,14 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-const estimatedHours = ['Bureau', 'Magasin', 'Restaurant', 'Clinique / Santé', "Entrepôt", "Autre"];
 
-const TypeLocal = () => {
+
+
+
+
+const estimatedHours = ['Nettoyage régulier', "Grand ménage", 'Nettoyage ponctuel', 'Nettoyage après fête ou événement', 'déménagement', " Autre.."];
+
+const TypeNetoyage = () => {
   const [selected, setSelected] = useState('');
   const [visible, setVisible] = useState(false);
 
@@ -22,11 +27,11 @@ const TypeLocal = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Type de local</Text>
+      <Text style={styles.label}>Type de netoyage</Text>
 
       <TouchableOpacity style={styles.dropdown} onPress={() => setVisible(true)}>
         <Text style={{ color: selected ? '#000' : '#999' }}>
-          {selected || 'Type de local'}
+          {selected || 'Type de netoyage'}
         </Text>
         <Ionicons name="chevron-down" size={20} color="#666" />
       </TouchableOpacity>
@@ -57,11 +62,11 @@ const TypeLocal = () => {
   );
 };
 
-export default TypeLocal;
+export default TypeNetoyage;
 
 const styles = StyleSheet.create({
   container: {
-    // margin: 20,
+    marginTop: 0,
   },
   label: {
     marginBottom: 6,

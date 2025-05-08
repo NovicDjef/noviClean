@@ -26,7 +26,6 @@ const HEADER_HEIGHT = Platform.OS === 'ios' ? 260 : 210;
 const DetailJob = (props: Props) => {
     const { id, name, image } = useLocalSearchParams();
     const [selectedTab, setSelectedTab] = useState('description');
-    const [isBookingVisible, setIsBookingVisible] = useState(false);
     const scrollY = useSharedValue(0);
     const headerShareValue = useSharedValue(80);
     const opacity = useSharedValue(0);
@@ -39,12 +38,15 @@ const DetailJob = (props: Props) => {
       };
     });
 
-
     const services = [
       { id: '1', name: 'Nettoyage cuisine', icon: 'restaurant' },
       { id: '2', name: 'Nettoyage salle de bain', icon: 'water' },
       { id: '3', name: 'Aspiration sol', icon: 'home' },
       { id: '4', name: 'Dépoussiérage', icon: 'leaf' },
+      { id: '1', name: 'Nettoyage des fenêtres', icon: 'restaurant' },
+      { id: '2', name: 'Repassage / buanderie', icon: 'water' },
+      { id: '3', name: 'Nettoyage du frigo / four', icon: 'home' },
+      { id: '4', name: 'Aspirateur canapé / tapis', icon: 'leaf' },
     ];
 
     const renderContent = () => {
@@ -371,7 +373,11 @@ const DetailJob = (props: Props) => {
         {renderServices()}
 
         <TouchableOpacity style={styles.booknow}
-           onPress={() => router.push("./Booking")}
+           onPress={() => router.push({
+            pathname: "./Booking",
+            params: {name}
+
+           })}
            >
           <Text style={styles.booknowText}>
             Book Now

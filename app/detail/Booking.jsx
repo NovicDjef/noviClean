@@ -1,16 +1,18 @@
 
  import React, { useState, useEffect, useRef } from 'react';
  import { View, Text, TextInput, Image, ScrollView, TouchableOpacity, ActivityIndicator, Easing, StyleSheet } from 'react-native'
-import { PromoCodeInput } from '../../components/PaymentComponents';
  import SearchLocationInput from "../../components/SearchLocationInput"
  import { COLORS } from '@/constants/theme';
  import HourDropdown from "../../components/HourDropdown"
  import SuperficieInput from "../../components/SuperficieInput"
+ import PhoneInput from "../../components/PhoneInput"
  import TypeLocal from "../../components/TypeLocal"
+ import TypeNetoyage from "../../components/TypeNetoyage"
+ import TypeLogementAvecPrix from "../../components/TypeLogementAvecPrix"
  import { Ionicons } from '@expo/vector-icons';
  import DateTimePicker from "@react-native-community/datetimepicker";
  import { StatusBar } from 'expo-status-bar';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
  import
       Animated, {
      withTiming,
@@ -20,6 +22,8 @@ import { router } from 'expo-router';
 
 
  const Booking = () => {
+  const { name } = useLocalSearchParams()
+
    const [cardInfo, setCardInfo] = useState({
      number: '',
      name: '',
@@ -73,6 +77,7 @@ import { router } from 'expo-router';
    const handlePlaceOrder = () => {
      setIsLoading(true);
      // Simuler un appel API
+     form.name
      setTimeout(() => {
        setIsLoading(false);
        setIsSuccess(true);
@@ -166,18 +171,21 @@ import { router } from 'expo-router';
                 />
           </Animated.View>
           <View style={{ marginTop: 45, right: -22}}>
-            <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 6 }}>Informations</Text>
+            <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 6 }}>{name}</Text>
           </View>
         </View>
        <SearchLocationInput />
-
-       <TextInput
-         placeholder="Name of Company"
-         value={formatCardNumber(cardInfo.number)}
-         onChangeText={(text) => updateCardInfo('number', text)}
-         keyboardType="numeric"
-         maxLength={19}
-         style={styless.input} />
+      
+        {name === "cleaning company" ? (
+        <TextInput
+        placeholder="Name of Company"
+        value={formatCardNumber(cardInfo.number)}
+        onChangeText={(text) => updateCardInfo('number', text)}
+        keyboardType="numeric"
+        maxLength={19}
+        style={styless.input} />
+        ) : null }
+      
          <TextInput
          placeholder="Nom Responsable"
          value={formatCardNumber(cardInfo.number)}
@@ -185,24 +193,25 @@ import { router } from 'expo-router';
          keyboardType="numeric"
          maxLength={19}
          style={styless.input} />
-         <TextInput
-         placeholder="Numero telephone"
-         value={formatCardNumber(cardInfo.number)}
-         onChangeText={(text) => updateCardInfo('number', text)}
-         keyboardType="numeric"
-         maxLength={19}
-         style={styless.input} />
+       
        <TextInput
          placeholder="Email Adress "
          value={cardInfo.name}
          onChangeText={(text) => updateCardInfo('name', text)}
          style={styless.input} />
-
-        <TypeLocal />
+          <PhoneInput />
+        {name === "cleaning company" ? (
+          <TypeLocal />
+        ) : null}
+         <TypeNetoyage />
+         {name === "House cleaning" ? (
+         <TypeLogementAvecPrix />
+         ): null}
         <HourDropdown />
-
-       <SuperficieInput />
-
+        {name === "cleaning company" ? (
+          <SuperficieInput />
+        ) : null }
+      
        <View style={styles.section}>
 
          <TouchableOpacity
@@ -279,7 +288,7 @@ import { router } from 'expo-router';
          <View style={styles.textAreaContainer}>
            <TextInput
              style={styles.textArea}
-             placeholder="Add notes or special instructions..."
+             placeholder="Ajouter une description pour votre besoin ici..."
              placeholderTextColor="#999"
              value={form.notes}
              onChangeText={(text) => setForm({ ...form, notes: text })}

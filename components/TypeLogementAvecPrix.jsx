@@ -5,14 +5,21 @@ import {
   TouchableOpacity,
   Modal,
   FlatList,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import {COLORS} from "../constants/theme"
 
-const estimatedHours = ['Bureau', 'Magasin', 'Restaurant', 'Clinique / Santé', "Entrepôt", "Autre"];
+const logements = [
+  { type: 'Studio (1½)', price: '50–55 $' },
+  { type: '2½ à 3½', price: '55–70 $' },
+  { type: '4½', price: '65–75 $' },
+  { type: '5½', price: '70–85 $' },
+  { type: '6½ ou plus', price: '85–100 $+' },
+];
 
-const TypeLocal = () => {
-  const [selected, setSelected] = useState('');
+const TypeLogementAvecPrix = () => {
+  const [selected, setSelected] = useState(null);
   const [visible, setVisible] = useState(false);
 
   const selectItem = (item) => {
@@ -22,14 +29,25 @@ const TypeLocal = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Type de local</Text>
+      <Text style={styles.label}>Type de logement</Text>
 
-      <TouchableOpacity style={styles.dropdown} onPress={() => setVisible(true)}>
-        <Text style={{ color: selected ? '#000' : '#999' }}>
-          {selected || 'Type de local'}
-        </Text>
-        <Ionicons name="chevron-down" size={20} color="#666" />
-      </TouchableOpacity>
+      <View style={styles.row}>
+        <TouchableOpacity
+          style={styles.dropdown}
+          onPress={() => setVisible(true)}
+        >
+          <Text style={{ color: selected ? '#000' : '#999' }}>
+            {selected?.type || 'Choisir...'}
+          </Text>
+          <Ionicons name="chevron-down" size={20} color="#666" />
+        </TouchableOpacity>
+
+        <View style={styles.priceBox}>
+          <Text style={styles.priceText}>
+            {selected?.price || '--'}
+          </Text>
+        </View>
+      </View>
 
       <Modal visible={visible} transparent animationType="fade">
         <TouchableOpacity
@@ -39,14 +57,14 @@ const TypeLocal = () => {
         >
           <View style={styles.dropdownList}>
             <FlatList
-              data={estimatedHours}
-              keyExtractor={(item) => item}
+              data={logements}
+              keyExtractor={(item) => item.type}
               renderItem={({ item }) => (
                 <TouchableOpacity
                   style={styles.option}
                   onPress={() => selectItem(item)}
                 >
-                  <Text>{item}</Text>
+                  <Text>{item.type}</Text>
                 </TouchableOpacity>
               )}
             />
@@ -57,17 +75,23 @@ const TypeLocal = () => {
   );
 };
 
-export default TypeLocal;
+export default TypeLogementAvecPrix;
 
 const styles = StyleSheet.create({
   container: {
-    // margin: 20,
+    marginVertical: 10,
   },
   label: {
     marginBottom: 6,
     fontWeight: '500',
+    fontSize: 16,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   dropdown: {
+    flex: 7,
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 12,
@@ -75,6 +99,18 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     backgroundColor: '#f0f0f0',
     alignItems: 'center',
+    marginRight: 8,
+  },
+  priceBox: {
+    flex: 3,
+    alignItems: 'center',
+    paddingVertical: 12,
+    backgroundColor: COLORS.primaryDark + 30,
+    borderRadius: 6,
+  },
+  priceText: {
+    fontWeight: '600',
+    color: COLORS.primaryDark,
   },
   modalOverlay: {
     flex: 1,
@@ -94,5 +130,3 @@ const styles = StyleSheet.create({
     borderBottomColor: '#eee',
   },
 });
-
-
